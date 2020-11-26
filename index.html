@@ -21,7 +21,6 @@
         <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="/public/media/favicon.png">
         <link rel="apple-touch-icon" type="image/png" href="/public/media/favicon.png">
         <link rel="apple-touch-icon-precomposed" type="image/png" href="/public/media/favicon.png">
-        <!-- Global site tag (gtag.js) - Google Analytics -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-DEBGT0G2BN"></script>
         <script>
             window.dataLayer = window.dataLayer || [];
@@ -34,38 +33,53 @@
         </script>
     </head>
     <body>
-        <div class="card text-center mx-3">
-            <div class="card-header bg-dark text-white px-4">
-                <h3 class="m-0"><strong>✌️ 수능 안내방송 시뮬레이션</strong></h3>
-            </div>
-            <div class="card-body py-4">
-                <h4 class="font-weight-light mb-3">현재 시각</h4>
-                <h1 class="font-weight-bold m-0" id="time">오전 00:00:00</h1>
-                <hr class="my-4">
-                <h4 class="font-weight-light mb-3">시험 진행 상황</h4>
-                <h3 class="font-weight-bold m-0" id="step">시뮬레이션 시작 대기중</h3>
-                <hr class="my-4">
-                <h4 class="font-weight-light mb-3">세부 설정</h4>
-                <span class="font-weight-bold mr-3"><input type="checkbox" id="melody"> 멜로디 타종 사용</span>
-                <span class="font-weight-bold"><input type="checkbox" id="additional" checked> 5교시 응시</span>
-            </div>
-            <div class="card-footer">
-                <button class="btn btn-block btn-primary mb-2" id="audio-toggler">
-                    안내방송 시작하기
-                </button>
-                <button class="btn btn-block btn-outline-danger btn-sm" onclick="location.reload();">
-                    안내방송 중지하기 (F5)
-                </button>
-            </div>
-            <div class="card-footer text-muted text-left">
-                <p class="mb-2">3교시 본령(13:10)은 제공되지 않습니다.</p>
-                <div class="text-right">
-                    Source: <a href="https://github.com/adrinerDP/sat.timer" target="_blank" class="font-weight-bold">Github</a>
+    <div class="box">
+        <div class="ringInfo">
+
+        </div>
+        <div class="upper">
+            <div class="sidebar">
+                <div class="logo">
+                    <h4>수능 안내방송</h4>
+                    <h5>시뮬레이션</h5>
                 </div>
-                <div class="text-right">
-                    제작: 이준수 (<a href="https://adrinerdp.co" target="_blank" class="font-weight-bold">adrinerdp.co</a>)
+                <div class="dday">
+                    D - <span id="dday"></span>
                 </div>
+            </div>
+            <div class="content">
+                <section id="timeInfo">
+                    <span id="time">오전 00:00:00</span>
+                </section>
+                <section id="stepInfo">
+                    <h4 class="mb-3">시험 진행 상황</h4>
+                    <h3 class="m-0" id="step">
+                        <span class="badge badge-primary align-bottom" id="step_group" hidden>제 4교시</span>
+                        <span class="badge badge-secondary align-bottom" id="step_sequence" hidden>1선택</span>
+                        <span class="font-weight-bold" id="step_subject" hidden>탐구영역</span>
+                        <span id="step_description">시뮬레이션 시작을 기다리고 있습니다</span>
+                    </h3>
+                </section>
+                <section id="preferences">
+                    <h4 class="mb-3">세부 설정</h4>
+                    <p class="font-weight-bold mb-2"><input type="checkbox" id="melody"> 멜로디 타종 사용</p>
+                    <p class="font-weight-bold m-0"><input type="checkbox" id="additional" checked> 5교시 응시</p>
+                </section>
+                <section id="actions">
+                    <div class="btn-group btn-block">
+                        <button class="btn btn-primary" id="audio-toggler">
+                            안내방송 재생
+                        </button>
+                        <button class="btn btn-danger" id="audio-stopper" onclick="location.reload();" disabled>
+                            안내방송 중지
+                        </button>
+                    </div>
+                </section>
             </div>
         </div>
+        <div class="info text-center">
+            ⓒ 이준수 | <a href="http://open.kakao.com/me/adrinerDP" target="_blank">문의하기</a> | <a href="https://adrinerdp.co" target="_blank">adrinerdp.co</a>
+        </div>
+    </div>
     </body>
 </html>

@@ -1,4 +1,5 @@
 @import "variables";
+@import "~noto-sans-kr/styles.css";
 @import "~bootstrap/scss/bootstrap";
 
 body {
@@ -7,11 +8,101 @@ body {
     width: 100vw;
     align-items: center;
     justify-content: center;
+    background: #ECEFF4;
+    background: linear-gradient(to top, #E5E9F0, #ECEFF4);
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+    &:hover {
+        color: inherit;
+        text-decoration: none;
+    }
 }
 
 .card {
     .card-header, .card-body, .card-footer {
         background: #ffffff;
         padding: 1rem;
+    }
+}
+
+.box {
+    display: flex;
+    flex-direction: column;
+    background: #ffffff;
+}
+
+.ringInfo {
+    padding: 1rem;
+    font-size: 1.4rem;
+    line-height: 1.4rem;
+    text-align: center;
+    font-weight: bold;
+    background: #B48EAD;
+    color: #ffffff;
+}
+
+.upper {
+    display: flex;
+    align-items: stretch;
+    .sidebar {
+        background: linear-gradient(to bottom, #2E3440, #3B4252);
+        .logo {
+            padding: 1rem;
+            background: #2E3440;
+            color: #ECEFF4;
+            text-align: center;
+            h4 {
+                font-weight: 700;
+                letter-spacing: -2px;
+                margin-bottom: 0.5rem;
+            }
+            h5 {
+                font-weight: 300;
+                font-size: 1.4rem;
+                letter-spacing: 4px;
+                margin-right: -4px;
+                margin-bottom: 0;
+            }
+        }
+        .dday {
+            padding: 1rem;
+            color: #ECEFF4;
+            background: #5E81AC;
+            text-align: center;
+            font-size: 1.4rem;
+            line-height: 1.4rem;
+            font-weight: 700;
+        }
+    }
+
+    .content {
+        section {
+            padding: 1rem;
+        }
+        #timeInfo {
+            text-align: center;
+            font-weight: 700;
+            font-size: 2.3rem;
+            line-height: 2.3rem;
+            padding: 1rem 10rem;
+            border-bottom: 1px solid #d1d8d4;
+        }
+        #stepInfo, #preferences {
+            border-bottom: 1px solid #d1d8d4;
+        }
+    }
+}
+
+.info {
+    padding: 1rem;
+    background: #4C566A;
+    color: #ECEFF4;
+    font-weight: 700;
+    p {
+        font-size: 0.9rem;
+        margin: 0;
     }
 }

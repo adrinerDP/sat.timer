@@ -1,270 +1,37 @@
 window.$ = window.jQuery = require('jquery');
-
-const step_text = {
-    PRE_ENTER: '입실준비',
-    ENTER: '입실',
-    PRE_START: '예비령',
-    READY: '준비령',
-    START: '본령',
-    PRE_END: '종료예고',
-    END: '종료령',
-};
-
-const group_text = {
-    1: '국어',
-    2: '수학',
-    3: '영어',
-    4: '탐구',
-    5: '제2외국어·한문',
-}
-
-const timetable = [
-    {
-      "TIME": "0805",
-      "GROUP": "1",
-      "SEQ": "1",
-      "TYPE": "PRE_ENTER"
-    },
-    {
-      "TIME": "0810",
-      "GROUP": "1",
-      "SEQ": "1",
-      "TYPE": "ENTER"
-    },
-    {
-      "TIME": "0825",
-      "GROUP": "1",
-      "SEQ": "1",
-      "TYPE": "PRE_START"
-    },
-    {
-      "TIME": "0835",
-      "GROUP": "1",
-      "SEQ": "1",
-      "TYPE": "READY"
-    },
-    {
-      "TIME": "0840",
-      "GROUP": "1",
-      "SEQ": "1",
-      "TYPE": "START"
-    },
-    {
-      "TIME": "0950",
-      "GROUP": "1",
-      "SEQ": "1",
-      "TYPE": "PRE_END"
-    },
-    {
-      "TIME": "1000",
-      "GROUP": "1",
-      "SEQ": "1",
-      "TYPE": "END"
-    },
-    {
-      "TIME": "1015",
-      "GROUP": "2",
-      "SEQ": "1",
-      "TYPE": "ENTER"
-    },
-    {
-      "TIME": "1020",
-      "GROUP": "2",
-      "SEQ": "1",
-      "TYPE": "PRE_START"
-    },
-    {
-      "TIME": "1025",
-      "GROUP": "2",
-      "SEQ": "1",
-      "TYPE": "READY"
-    },
-    {
-      "TIME": "1030",
-      "GROUP": "2",
-      "SEQ": "1",
-      "TYPE": "START"
-    },
-    {
-      "TIME": "1200",
-      "GROUP": "2",
-      "SEQ": "1",
-      "TYPE": "PRE_END"
-    },
-    {
-      "TIME": "1210",
-      "GROUP": "2",
-      "SEQ": "1",
-      "TYPE": "END"
-    },
-    {
-      "TIME": "1255",
-      "GROUP": "3",
-      "SEQ": "1",
-      "TYPE": "ENTER"
-    },
-    {
-      "TIME": "1300",
-      "GROUP": "3",
-      "SEQ": "1",
-      "TYPE": "PRE_START"
-    },
-    {
-      "TIME": "1305",
-      "GROUP": "3",
-      "SEQ": "1",
-      "TYPE": "READY"
-    },
-    {
-      "TIME": "1310",
-      "GROUP": "3",
-      "SEQ": "1",
-      "TYPE": "START"
-    },
-    {
-      "TIME": "1410",
-      "GROUP": "3",
-      "SEQ": "1",
-      "TYPE": "PRE_END"
-    },
-    {
-      "TIME": "1420",
-      "GROUP": "3",
-      "SEQ": "1",
-      "TYPE": "END"
-    },
-    {
-      "TIME": "1435",
-      "GROUP": "4",
-      "SEQ": "1",
-      "TYPE": "ENTER"
-    },
-    {
-      "TIME": "1440",
-      "GROUP": "4",
-      "SEQ": "1",
-      "TYPE": "PRE_START"
-    },
-    {
-      "TIME": "1445",
-      "GROUP": "4",
-      "SEQ": "1",
-      "TYPE": "READY"
-    },
-    {
-      "TIME": "1450",
-      "GROUP": "4",
-      "SEQ": "1",
-      "TYPE": "START"
-    },
-    {
-      "TIME": "1515",
-      "GROUP": "4",
-      "SEQ": "1",
-      "TYPE": "PRE_END"
-    },
-    {
-      "TIME": "1520",
-      "GROUP": "4",
-      "SEQ": "1",
-      "TYPE": "END"
-    },
-    {
-      "TIME": "1525",
-      "GROUP": "4",
-      "SEQ": "2",
-      "TYPE": "READY"
-    },
-    {
-      "TIME": "1530",
-      "GROUP": "4",
-      "SEQ": "2",
-      "TYPE": "START"
-    },
-    {
-      "TIME": "1555",
-      "GROUP": "4",
-      "SEQ": "2",
-      "TYPE": "PRE_END"
-    },
-    {
-      "TIME": "1600",
-      "GROUP": "4",
-      "SEQ": "2",
-      "TYPE": "END"
-    },
-    {
-      "TIME": "1602",
-      "GROUP": "4",
-      "SEQ": "3",
-      "TYPE": "START"
-    },
-    {
-      "TIME": "1627",
-      "GROUP": "4",
-      "SEQ": "3",
-      "TYPE": "PRE_END"
-    },
-    {
-      "TIME": "1632",
-      "GROUP": "4",
-      "SEQ": "3",
-      "TYPE": "END"
-    },
-    {
-      "TIME": "1645",
-      "GROUP": "5",
-      "SEQ": "1",
-      "TYPE": "ENTER"
-    },
-    {
-      "TIME": "1650",
-      "GROUP": "5",
-      "SEQ": "1",
-      "TYPE": "PRE_START"
-    },
-    {
-      "TIME": "1655",
-      "GROUP": "5",
-      "SEQ": "1",
-      "TYPE": "READY"
-    },
-    {
-      "TIME": "1700",
-      "GROUP": "5",
-      "SEQ": "1",
-      "TYPE": "START"
-    },
-    {
-      "TIME": "1730",
-      "GROUP": "5",
-      "SEQ": "1",
-      "TYPE": "PRE_END"
-    },
-    {
-      "TIME": "1740",
-      "GROUP": "5",
-      "SEQ": "1",
-      "TYPE": "END"
-    }
-  ];
+require('./variables');
 
 $(() => {
     const toggler = $('#audio-toggler');
+    const stopper = $('#audio-stopper');
     const time    = $('#time');
-    const step    = $('#step');
+    const dday    = $('#dday');
+    const ringInfo = $('.ringInfo');
+
+    const step_group       = $('#step_group');
+    const step_sequence    = $('#step_sequence');
+    const step_subject     = $('#step_subject');
+    const step_description = $('#step_description');
+
     const melody  = $('#melody');
     const add     = $('#additional');
 
+    ringInfo.toggle(0);
+    const diff = new Date('2020-12-03').getTime() - new Date().getTime();
+    dday.text(Math.floor(diff / (1000 * 60 * 60 * 24)) + 1);
+
     function getCurrentTimeCode() {
         const date = new Date();
-        let currentTimeKey =  String(date.getHours()).padStart(2, "0") + String(date.getMinutes()).padStart(2, "0")
-        return currentTimeKey;
+        return String(date.getHours()).padStart(2, "0") + String(date.getMinutes()).padStart(2, "0");
     }
 
     function getCurrentBlock(code) {
-        if (code > timetable[timetable.length - 1].TIME || code < timetable[0].TIME) {
-            return false;
+        if (code > timetable[timetable.length - 1].TIME) {
+            return 'AFTER';
+        }
+
+        if (code < timetable[0].TIME) {
+            return 'BEFORE';
         }
 
         for (let i = 0; i < timetable.length; i++) {
@@ -279,9 +46,23 @@ $(() => {
         }
     }
 
-    function playAudio(type, code) {
-        const audio = new Audio('/public/media/' + type + '/' + code + '.mp3');
-        audio.play();
+    function playAudio(block, type) {
+        if (block.TIME === '1310') {
+            return false;
+        }
+        let text = '제 ' + block.GROUP + '교시 ' + group_text[block.GROUP.toString() + block.SEQ.toString()] + '영역 ';
+        if (block.SEQ !== '1') {
+            text += block.SEQ - 1 + '선택 ';
+        }
+        text += ring_text[block.TYPE] + ' 재생중';
+        ringInfo.text(text);
+        ringInfo.fadeToggle(300, 'swing');
+        const audio = new Audio('/public/media/' + type + '/' + block.TIME + '.mp3');
+        audio.play().then(() => {
+            setTimeout(() => {
+                ringInfo.fadeToggle(300, 'swing');
+            }, (audio.duration + 1) * 1000);
+        });
     }
 
     function setTimeString() {
@@ -289,14 +70,24 @@ $(() => {
     }
 
     function setStepString(block) {
-        step.text('제 ' + block.GROUP + '교시 ' + group_text[block.GROUP] + '영역 ' + step_text[block.TYPE]);
+        step_group.attr('hidden', false);
+        step_subject.attr('hidden', false);
+        step_group.text('제 ' + block.GROUP + '교시');
+        step_subject.text(group_text[block.GROUP.toString() + block.SEQ.toString()] + '영역 ');
+        step_description.text(step_text[block.TYPE]);
+        if (block.SEQ !== '1') {
+            step_sequence.text(block.SEQ - 1 + '선택');
+            step_sequence.attr('hidden', false);
+        } else {
+            step_sequence.attr('hidden', true);
+        }
     }
 
-    function processTrack(code) {
+    function processTrack(block) {
         if (melody.is(':checked')) {
-            playAudio('melody', code);
+            playAudio(block, 'melody');
         } else {
-            playAudio('normal', code);
+            playAudio(block,'normal');
         }
     }
 
@@ -308,18 +99,21 @@ $(() => {
         setInterval(() => {
             const code = getCurrentTimeCode();
             const block = getCurrentBlock(code);
-            if (block !== false) {
+            if (block === 'BEFORE') {
+                step_description.text('시험이 시작되지 않았습니다');
+            } else if (block === 'AFTER') {
+                step_description.text('시험이 종료 되었습니다');
+            } else if (block !== false) {
                 setStepString(block);
-                if (block.GROUP === 5 && add.is(':checked')) {
-                    processTrack(block.TIME);
+                if (block.GROUP === '5' && add.is(':checked')) {
+                    processTrack(block);
                 }
-                if (block.GROUP !== 5) {
-                    processTrack(block.TIME);
+                if (block.GROUP !== '5') {
+                    processTrack(block);
                 }
             }
         }, 1000);
-        toggler.addClass('btn-light');
-        toggler.text('안내방송이 진행중입니다');
         toggler.attr('disabled', true);
+        stopper.attr('disabled', false);
     })
 })
