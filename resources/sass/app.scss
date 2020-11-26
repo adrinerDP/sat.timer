@@ -85,12 +85,17 @@ a {
         #timeInfo {
             text-align: center;
             font-weight: 700;
-            font-size: 2.3rem;
-            line-height: 2.3rem;
-            padding: 1rem 10rem;
+            font-size: 2.1rem;
+            line-height: 2.1rem;
+            padding: 1rem 0;
             border-bottom: 1px solid #d1d8d4;
         }
-        #stepInfo, #preferences {
+        #stepInfo {
+            width: 100vw;
+            max-width: 35rem;
+            border-bottom: 1px solid #d1d8d4;
+        }
+        #preferences {
             border-bottom: 1px solid #d1d8d4;
         }
     }
