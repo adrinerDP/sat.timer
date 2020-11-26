@@ -24,16 +24,18 @@
         <!-- Global site tag (gtag.js) - Google Analytics -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-DEBGT0G2BN"></script>
         <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-
-        gtag('config', 'G-DEBGT0G2BN');
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-DEBGT0G2BN');
+            setTimeout(function() {
+                _gaq.push(['_trackEvent', 'Heartbeat', 'Heartbeat', '', 0, true]);
+            }, 15*60*1000);
         </script>
     </head>
     <body>
-        <div class="card text-center" style="min-width: 500px">
-            <div class="card-header bg-dark text-white">
+        <div class="card text-center mx-3">
+            <div class="card-header bg-dark text-white px-4">
                 <h3 class="m-0"><strong>✌️ 수능 안내방송 시뮬레이션</strong></h3>
             </div>
             <div class="card-body py-4">
@@ -48,15 +50,20 @@
                 <span class="font-weight-bold"><input type="checkbox" id="additional" checked> 5교시 응시</span>
             </div>
             <div class="card-footer">
-                <button class="btn btn-block btn-primary" id="audio-toggler">
+                <button class="btn btn-block btn-primary mb-2" id="audio-toggler">
                     안내방송 시작하기
+                </button>
+                <button class="btn btn-block btn-outline-danger btn-sm" onclick="location.reload();">
+                    안내방송 중지하기 (F5)
                 </button>
             </div>
             <div class="card-footer text-muted text-left">
-                <p class="my-1">안내방송 중지는 F5를 눌러 새로고침하세요.</p>
-                <p class="m-0">3교시 본령은 제공되지 않습니다.</p>
+                <p class="mb-2">3교시 본령(13:10)은 제공되지 않습니다.</p>
                 <div class="text-right">
-                    <a href="https://adrinerdp.co" class="font-weight-bold">adrinerdp.co</a>
+                    Source: <a href="https://github.com/adrinerDP/sat.timer" target="_blank" class="font-weight-bold">Github</a>
+                </div>
+                <div class="text-right">
+                    제작: 이준수 (<a href="https://adrinerdp.co" target="_blank" class="font-weight-bold">adrinerdp.co</a>)
                 </div>
             </div>
         </div>
