@@ -28,7 +28,7 @@ $(() => {
 
     function getCurrentBlock(code) {
         if (code > timetable[timetable.length - 1].TIME || code < timetable[0].TIME) {
-            return false;
+            return 'NOT_TIME';
         }
 
         for (let i = 0; i < timetable.length; i++) {
@@ -99,10 +99,10 @@ $(() => {
             const block = getCurrentBlock(code);
             const soundType = $('#sound_type').val();
 
-            if (!block) {
+            if (block === 'NOT_TIME') {
                 step_description.text('시험 진행 시간이 아닙니다 / FAQ 참조');
                 step_description.addClass('text-danger font-weight-bold');
-            } else {
+            } else if (block !== false) {
                 setStepString(block);
                 if (isNowFifthTime(block) && isTakingFifthTime()) {
                     playAudio(block, soundType);
