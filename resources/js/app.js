@@ -1,4 +1,6 @@
 window.$ = window.jQuery = require('jquery');
+window.Popper = require('popper.js');
+require('bootstrap');
 require('./variables');
 
 $(() => {
@@ -13,8 +15,7 @@ $(() => {
     const step_subject     = $('#step_subject');
     const step_description = $('#step_description');
 
-    const melody  = $('#melody');
-    const add     = $('#additional');
+    const add       = $('#additional');
 
     ringInfo.toggle(0);
     const diff = new Date('2020-12-03').getTime() - new Date().getTime();
@@ -26,12 +27,8 @@ $(() => {
     }
 
     function getCurrentBlock(code) {
-        if (code > timetable[timetable.length - 1].TIME) {
-            return 'AFTER';
-        }
-
-        if (code < timetable[0].TIME) {
-            return 'BEFORE';
+        if (code > timetable[timetable.length - 1].TIME || code < timetable[0].TIME) {
+            return false;
         }
 
         for (let i = 0; i < timetable.length; i++) {
@@ -57,7 +54,7 @@ $(() => {
         text += ring_text[block.TYPE] + ' 재생중';
         ringInfo.text(text);
         ringInfo.fadeToggle(300, 'swing');
-        const audio = new Audio('/public/media/' + type + '/' + block.TIME + '.mp3');
+        const audio = new Audio('/public/sounds/' + type + '/' + block.TIME + '.mp3');
         audio.play().then(() => {
             setTimeout(() => {
                 ringInfo.fadeToggle(300, 'swing');
@@ -83,12 +80,13 @@ $(() => {
         }
     }
 
-    function processTrack(block) {
-        if (melody.is(':checked')) {
-            playAudio(block, 'melody');
-        } else {
-            playAudio(block,'normal');
-        }
+    function isNowFifthTime(block) {
+        return block.GROUP === '5';
+
+    }
+
+    function isTakingFifthTime() {
+        return !!add.is(':checked');
     }
 
     setInterval(() => {
@@ -99,20 +97,28 @@ $(() => {
         setInterval(() => {
             const code = getCurrentTimeCode();
             const block = getCurrentBlock(code);
-            if (block === 'BEFORE') {
-                step_description.text('시험이 시작되지 않았습니다');
-            } else if (block === 'AFTER') {
-                step_description.text('시험이 종료 되었습니다');
-            } else if (block !== false) {
+            const soundType = $('#sound_type').val();
+
+            if (!block) {
+                step_description.text('시험 진행 시간이 아닙니다 / FAQ 참조');
+                step_description.addClass('text-danger font-weight-bold');
+            } else {
                 setStepString(block);
-                if (block.GROUP === '5' && add.is(':checked')) {
-                    processTrack(block);
+                if (isNowFifthTime(block) && isTakingFifthTime()) {
+                    playAudio(block, soundType);
                 }
-                if (block.GROUP !== '5') {
-                    processTrack(block);
+                if (!isNowFifthTime(block)) {
+                    if (block.TIME === '1632') {
+                        block.TIME = '1632A';
+                        if (isTakingFifthTime()) {
+                            block.TIME = '1632B';
+                        }
+                    }
+                    playAudio(block, soundType);
                 }
             }
         }, 1000);
+
         toggler.attr('disabled', true);
         stopper.attr('disabled', false);
     })
