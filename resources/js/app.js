@@ -18,7 +18,7 @@ $(() => {
     const add       = $('#additional');
 
     ringInfo.toggle(0);
-    const diff = new Date('2020-12-03').getTime() - new Date().getTime();
+    const diff = new Date('2021-11-18').getTime() - new Date().getTime();
     dday.text(Math.floor(diff / (1000 * 60 * 60 * 24)) + 1);
 
     function getCurrentTimeCode() {
